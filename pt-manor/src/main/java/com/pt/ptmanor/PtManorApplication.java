@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PtManorApplication {
 
 	//测试
+    //测试
 	public static void main(String[] args) {
 		SpringApplication.run(PtManorApplication.class, args);
 	}
