@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-chat" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-chat/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-common/pt-common-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-common/pt-common-mybatis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-common/pt-common-security" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-common/pt-common-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-proc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-proc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-prod" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-dealer/pt-dealer-prod/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-gateway/src/main/resources/application.yml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-manor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-manor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-portal/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-upload/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pt-warehouse" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

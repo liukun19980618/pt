@@ -1,0 +1,76 @@
+server:
+  port: 9998
+
+spring:
+  application:
+    name: pt-gateway
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+      routes:
+        - id: pt-portal
+          uri: lb://pt-portal
+          predicates:
+            - Path=/portal/**
+          filters:
+            - StripPrefix= 1
+        # ???????
+        - id: pt-auth
+          uri: lb://pt-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            # ??????????
+            - PasswordDecoderFilter
+            - StripPrefix= 1
+        # ???????
+        - id: pt-dealer-proc
+          uri: lb://pt-dealer-proc
+          predicates:
+            - Path=/proc/**
+          filters:
+            - StripPrefix= 1
+        - id: pt-user
+          uri: lb://pt-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix= 1
+        - id: pt-dealer-prod
+          uri: lb://pt-dealer-prod
+          predicates:
+            - Path=/prod/**
+          filters:
+            - StripPrefix= 1
+        - id: pt-upload
+          uri: lb://pt-upload
+          predicates:
+            - Path=/upload/**
+          filters:
+            - StripPrefix= 1
+        - id: pt-manor
+          uri: lb://pt-manor
+          predicates:
+            - Path=/manor/**
+          filters:
+            - StripPrefix= 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+  instance:
+    prefer-ip-address: true
+
+
+security:
+  encode:
+    #16位
+    key: '-www.cup.edu.cn-'
+ribbon:
+  eureka:
+    enabled: true
+  ConnectTimeout: 1000 # ribbon?????????(ms)
+  ReadTimeout: 3500 # ribbon?????????(ms)
+#  MaxAutoRetries: 0 # ??????????????
+#  MaxAutoRetriesNextServer: 0 # ????????????????????????????????????

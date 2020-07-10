@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.ptuser.mapper.SysDeptMapper">
+  <resultMap id="BaseResultMap" type="com.pt.ptuser.entity.SysDept">
+    <!--@mbg.generated-->
+    <!--@Table dealer_dept-->
+    <id column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="ancestors" jdbcType="VARCHAR" property="ancestors" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="leader" jdbcType="VARCHAR" property="leader" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="selectSysDept">
+        select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time
+        from dynamic_dept d
+    </sql>
+  <select id="selectDeptList"  resultMap="BaseResultMap">
+    <include refid="selectSysDept"/>
+    where d.del_flag = '0'
+    <if test="parentId != null and parentId != 0">
+      AND parent_id = #{parentId}
+    </if>
+    <if test="deptName != null and deptName != ''">
+      AND dept_name like concat('%', #{deptName}, '%')
+    </if>
+    <if test="status != null and status != ''">
+      AND status = #{status}
+    </if>
+    order by d.parent_id, d.order_num
+  </select>
+  <select id="checkDeptExistUser"  resultType="int">
+    select count(1) from dynamic_user where dept_id = #{deptId} and del_flag = '0'
+  </select>
+
+  <select id="checkDeptNameUnique" resultMap="BaseResultMap">
+    <include refid="selectSysDept"/>
+    where dept_name=#{deptName} and parent_id = #{parentId}
+  </select>
+
+  <select id="selectDeptById"  resultMap="BaseResultMap">
+    <include refid="selectSysDept"/>
+    where dept_id = #{deptId}
+  </select>
+
+  <insert id="insertDept" >
+    insert into dynamic_dept(
+    <if test="deptId != null and deptId != ''">dept_id,</if>
+    <if test="parentId != null and parentId != '0'">parent_id,</if>
+    <if test="deptName != null and deptName != ''">dept_name,</if>
+    <if test="ancestors != null and ancestors != ''">ancestors,</if>
+    <if test="orderNum != null and orderNum != ''">order_num,</if>
+    <if test="leader != null and leader != ''">leader,</if>
+    <if test="phone != null and phone != ''">phone,</if>
+    <if test="email != null and email != ''">email,</if>
+    <if test="status != null">status,</if>
+    <if test="createBy != null and createBy != ''">create_by,</if>
+    create_time
+    )values(
+    <if test="deptId != null and deptId != ''">#{deptId},</if>
+    <if test="parentId != null and parentId != '0'">#{parentId},</if>
+    <if test="deptName != null and deptName != ''">#{deptName},</if>
+    <if test="ancestors != null and ancestors != ''">#{ancestors},</if>
+    <if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+    <if test="leader != null and leader != ''">#{leader},</if>
+    <if test="phone != null and phone != ''">#{phone},</if>
+    <if test="email != null and email != ''">#{email},</if>
+    <if test="status != null">#{status},</if>
+    <if test="createBy != null and createBy != ''">#{createBy},</if>
+    sysdate()
+    )
+  </insert>
+
+  <select id="hasChildByDeptId"  resultType="int">
+    select count(1) from dynamic_dept
+    where del_flag = '0' and parent_id = #{deptId}
+  </select>
+  <delete id="deleteDeptById" >
+    update dynamic_dept set del_flag = '1' where dept_id = #{deptId}
+  </delete>
+
+  <update id="updateDept">
+    update dynamic_dept
+    <set>
+      <if test="parentId != null and parentId != '0'">parent_id = #{parentId},</if>
+      <if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+      <if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
+      <if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+      <if test="leader != null">leader = #{leader},</if>
+      <if test="phone != null">phone = #{phone},</if>
+      <if test="email != null">email = #{email},</if>
+      <if test="status != null and status != ''">status = #{status},</if>
+      <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+      update_time = sysdate()
+    </set>
+    where dept_id = #{deptId}
+  </update>
+
+  <update id="updateDeptChildren" >
+    update dynamic_dept set ancestors =
+    <foreach collection="depts" item="item" index="index"
+             separator=" " open="case dept_id" close="end">
+      when #{item.deptId} then #{item.ancestors}
+    </foreach>
+    where dept_id in
+    <foreach collection="depts" item="item" index="index"
+             separator="," open="(" close=")">
+      #{item.deptId}
+    </foreach>
+  </update>
+
+  <update id="updateDeptStatus" >
+    update dynamic_dept
+    <set>
+      <if test="status != null and status != ''">status = #{status},</if>
+      <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+      update_time = sysdate()
+    </set>
+    where dept_id in ('${ancestors}')
+  </update>
+
+  <select id="selectChildrenDeptById"  resultMap="BaseResultMap">
+    select * from dynamic_dept where find_in_set(#{deptId}, ancestors)
+  </select>
+
+  <select id="selectNormalChildrenDeptById"  resultType="java.lang.Integer">
+    select count(*) from dynamic_dept where status = '0' and del_flag = '0' and find_in_set(#{deptId}, ancestors)
+  </select>
+</mapper>

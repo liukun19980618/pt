@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pt-auth" />
+        <module name="pt-center" />
+        <module name="pt-chat" />
+        <module name="pt-common" />
+        <module name="pt-common-core" />
+        <module name="pt-common-mybatis" />
+        <module name="pt-common-security" />
+        <module name="pt-dealer" />
+        <module name="pt-dealer-order" />
+        <module name="pt-dealer-proc" />
+        <module name="pt-dealer-prod" />
+        <module name="pt-eureka" />
+        <module name="pt-gateway" />
+        <module name="pt-manor" />
+        <module name="pt-order" />
+        <module name="pt-portal" />
+        <module name="pt-upload" />
+        <module name="pt-user" />
+        <module name="pt-warehouse" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="pt" target="1.8" />
+      <module name="pt-auth" target="1.8" />
+      <module name="pt-center" target="1.8" />
+      <module name="pt-center-user" target="8" />
+      <module name="pt-chat" target="1.8" />
+      <module name="pt-common" target="1.8" />
+      <module name="pt-common-core" target="1.8" />
+      <module name="pt-common-mybatis" target="1.8" />
+      <module name="pt-common-security" target="1.8" />
+      <module name="pt-dealer" target="1.8" />
+      <module name="pt-dealer-order" target="1.8" />
+      <module name="pt-dealer-proc" target="1.8" />
+      <module name="pt-dealer-prod" target="1.8" />
+      <module name="pt-dealer-user" target="8" />
+      <module name="pt-eureka" target="1.8" />
+      <module name="pt-gateway" target="1.8" />
+      <module name="pt-manor" target="1.8" />
+      <module name="pt-manor-user" target="8" />
+      <module name="pt-order" target="1.8" />
+      <module name="pt-portal" target="1.8" />
+      <module name="pt-upload" target="1.8" />
+      <module name="pt-user" target="1.8" />
+      <module name="pt-warehouse" target="1.8" />
+      <module name="pt-warehouse-user" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pt" options="" />
+      <module name="pt-auth" options="-parameters" />
+      <module name="pt-center" options="-parameters" />
+      <module name="pt-center-user" options="-parameters" />
+      <module name="pt-chat" options="-parameters" />
+      <module name="pt-common" options="-parameters" />
+      <module name="pt-common-core" options="-parameters" />
+      <module name="pt-common-mybatis" options="-parameters" />
+      <module name="pt-common-security" options="-parameters" />
+      <module name="pt-dealer" options="-parameters" />
+      <module name="pt-dealer-order" options="-parameters" />
+      <module name="pt-dealer-proc" options="-parameters" />
+      <module name="pt-dealer-prod" options="-parameters" />
+      <module name="pt-dealer-user" options="-parameters" />
+      <module name="pt-eureka" options="-parameters" />
+      <module name="pt-gateway" options="-parameters" />
+      <module name="pt-manor" options="-parameters" />
+      <module name="pt-manor-user" options="-parameters" />
+      <module name="pt-order" options="-parameters" />
+      <module name="pt-portal" options="-parameters" />
+      <module name="pt-upload" options="-parameters" />
+      <module name="pt-user" options="-parameters" />
+      <module name="pt-warehouse" options="-parameters" />
+      <module name="pt-warehouse-user" options="-parameters" />
+    </option>
+  </component>
+</project>

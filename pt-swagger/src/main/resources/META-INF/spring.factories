@@ -1,0 +1,4 @@
+# 配置 Auto Configuration
+# 自己编写的依赖需要此文件来完成Bean的注入
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.pt.ptswagger.SwaggerAutoConfiguration

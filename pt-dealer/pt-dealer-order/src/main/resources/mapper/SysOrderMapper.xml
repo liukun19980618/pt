@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, lengleng All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: lengleng (wangiegie@gmail.com)
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pt.ptdealerorder.mapper.SysOrderMapper">
+
+  <resultMap id="sysOrderMap" type="com.pt.ptdealerorder.entity.SysOrder">
+                  <id property="orderId" column="order_id"/>
+                        <result property="sellerId" column="seller_id"/>
+                        <result property="sellerName" column="seller_name"/>
+                        <result property="buyerId" column="buyer_id"/>
+                        <result property="buyerName" column="buyer_name"/>
+                        <result property="productId" column="product_id"/>
+                        <result property="productName" column="product_name"/>
+                        <result property="productAmount" column="product_amount"/>
+                        <result property="productPrice" column="product_price"/>
+                        <result property="productTotal" column="product_total"/>
+                        <result property="orderType" column="order_type"/>
+	  					<result property="CreatorId" column="creator_id"/>
+	  					<result property="CreatorName" column="creator_name"/>
+                        <result property="CreateTime" column="create_time"/>
+					    <result property="invFlag" column="inv_flag"/>
+					    <result property="checkFlag" column="check_flag"/>
+					    <result property="reviewerId" column= "reviewer_id"/>
+					    <result property="reviewerName" column= "reviewer_name"/>
+	  					<result property="reviewerSuggestions" column= "reviewer_suggestions"/>
+            </resultMap>
+	<select id="getOrderPage" resultMap="sysOrderMap" parameterType="com.pt.ptdealerorder.entity.Query">
+		SELECT
+		`order`.order_id,
+		`order`.seller_id,
+		`order`.seller_name,
+		`order`.buyer_id,
+		`order`.buyer_name,
+		`order`.product_id,
+		`order`.product_name,
+		`order`.product_amount,
+		`order`.product_price,
+		`order`.product_total,
+		`order`.order_type,
+		`order`.creator_id,
+		`order`.creator_name,
+		`order`.create_time,
+		`order`.inv_flag,
+		`order`.check_flag,
+		`order`.reviewer_id,
+		`order`.reviewer_name,
+		`order`.reviewer_suggestions
+		FROM
+		sys_order AS `order`
+		<where>
+			`order`.del_flag = '0'
+			<if test="query.orderId != null and query.orderId != ''">
+				AND
+				`order`.order_id LIKE CONCAT('%', #{query.orderId},'%')
+			</if>
+			<if test="query.buyerName != null and query.buyerName != ''">
+				AND
+				`order`.buyer_name LIKE CONCAT('%', #{query.buyerName},'%')
+			</if>
+			<if test="query.productId != null and query.productId != ''">
+				AND
+				`order`.product_id LIKE CONCAT('%', #{query.productId},'%')
+			</if>
+			<if test="query.checkFlag != null and query.checkFlag != ''">
+				AND
+				`order`.check_flag = #{query.checkFlag}
+			</if>
+			<if test="query.invFlag != null and query.invFlag != ''">
+				AND
+				`order`.inv_flag = #{query.invFlag}
+			</if>
+			<if test="query.creatorId != null and query.creatorId != ''">
+				AND
+				`order`.creator_id = #{query.creatorId}
+			</if>
+			<choose>
+				<when test="query.timeSearchType == 'recent'">
+					AND `order`.create_time &gt; DATE_SUB(CURDATE(), INTERVAL 1 WEEK )
+				</when>
+				<when test="query.timeSearchType == 'one'">
+					AND `order`.create_time &gt; DATE_SUB(CURDATE(), INTERVAL 1 MONTH )
+				</when>
+				<when test="query.timeSearchType == 'three'">
+					AND `order`.create_time &gt; DATE_SUB(CURDATE(), INTERVAL 3 MONTH )
+				</when>
+				<when test="query.timeSearchType == 'half'">
+					AND `order`.create_time &gt; DATE_SUB(CURDATE(), INTERVAL 6 MONTH )
+				</when>
+				<when test="query.timeSearchType == 'year'">
+					AND `order`.create_time &gt; DATE_SUB(CURDATE(), INTERVAL 1 YEAR )
+				</when>
+				<when test="query.timeSearchType == 'specific'">
+					AND `order`.create_time &gt; #{query.timeSearchStart}
+					AND `order`.create_time &lt; #{query.timeSearchEnd}
+				</when>
+			</choose>
+		</where>
+
+
+		ORDER BY `order`.create_time DESC
+	</select>
+</mapper>

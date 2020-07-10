@@ -1,0 +1,76 @@
+server:
+  port: 8082
+security:
+  oauth2:
+    client:
+      client-id: manor #\u8981\u4E0Eoauth_client_details\u8868\u4E2D\u7684client_id\u4E00\u81F4
+      client-secret: secret #\u8981\u4E0Eoauth_client_details\u8868\u4E2D\u7684client_secret\u4E00\u81F4
+      access-token-uri: http://localhost:9001/oauth/token
+      user-authorization-uri: http://localhost:9001/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:9001/oauth/check_token
+
+spring:
+  application:
+    name: pt-manor
+#  mvc:
+#    servlet:
+#      load-on-startup: 100
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/pt?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+    hikari:
+          minimum-idle: 5
+          idle-timeout: 600000
+          maximum-pool-size: 10
+          auto-commit: true
+          pool-name: MyHikariCP
+          max-lifetime: 1800000
+          connection-timeout: 30000
+          connection-test-query: SELECT 1
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+
+mybatis:
+  type-aliases-package: com.pt.ptmanor.pojo
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      update-strategy: not_empty
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+  instance:
+    prefer-ip-address: true
+
+ribbon:
+  eureka:
+    enabled: true
+
